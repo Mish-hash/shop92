@@ -15,5 +15,12 @@
     return view('welcome');
 }); */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'MainController@index')->name('home');
+Route::get('/contacts', 'MainController@contacts');
+Route::post('/contacts', 'MainController@getContacts');
 Route::get('/category/{slug}', 'ShopController@category');
+
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index');
+
