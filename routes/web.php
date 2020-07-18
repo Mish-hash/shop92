@@ -22,5 +22,16 @@ Route::get('/category/{slug}', 'ShopController@category');
 
 Auth::routes();
 
+//Admin routes --- routes group for Admin
+Route::group([
+    'prefix' => '/admin',
+    'namespace' => 'Admin',
+    'middleware' => ['auth', 'admin']
+], function(){
+    Route::get('/', 'AdminController@index');
+});
+
+
+
 //Route::get('/home', 'HomeController@index');
 
