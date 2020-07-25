@@ -9,7 +9,6 @@ class AdminController extends Controller
 {
     public function index() 
     {
-        dd( \Auth::user()->isAdmin() );
-        return 'Admin panel';
+        return view('admin.index');
     }
 }

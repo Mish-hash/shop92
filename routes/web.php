@@ -29,6 +29,7 @@ Route::group([
     'middleware' => ['auth', 'admin']
 ], function(){
     Route::get('/', 'AdminController@index');
+    Route::resource('category', 'CategoryController');
 });
 
 
