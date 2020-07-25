@@ -29,6 +29,7 @@
                 <td>{{$item->name}}</td>
                 <td>{{$item->slug}}</td>
                 <td>
+                    <a href="{{route('category.edit', ['category' => $item->id])}}" class="btn btn-warning">Edit</a>
                     <form action="/admin/category/{{$item->id}}" method="POST">
                         @method('DELETE')
                         @csrf

@@ -24,9 +24,9 @@ class StoreCategory extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:categories|max:64',
-            'slug' => 'required|unique:categories|max:128',
-            'file' => 'nullable|mimes:jpeg,bmp,png',
+            'name' => 'required|unique:categories,name,'.$this->category.'|max:64',
+            'slug' => 'nullable|unique:categories,slug,'.$this->category.'|max:128',
+            'img' => 'nullable|mimes:jpeg,bmp,png',
         ];
     }
 
@@ -35,6 +35,7 @@ class StoreCategory extends FormRequest
         return [
             'name.required' => 'A :attribute is required',
             'slug.required' => 'A :attribute is required',
+            'img.mimes' => 'A :attribute is required',
         ];
     }
 }

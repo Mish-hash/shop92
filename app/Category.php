@@ -16,5 +16,19 @@ class Category extends Model
     public function getImgAttribute($value)
     {
         return $value ? $value : asset('/images/noImg.jpg');
-    }    
+    }
+
+    public function setSlugAttribute($value) 
+    {
+        $this->attributes['slug'] = \Str::slug(empty($value) ? $this->name : $value, '-');
+    }
+
+    public function setImgAttribute($img)
+    {
+        
+        $fName = $img->getClientOriginalName();
+        $img->move( public_path('uploads'), $fName );
+        $this->attributes['img'] = '/uploads/' . $fName;
+        
+    }
 }

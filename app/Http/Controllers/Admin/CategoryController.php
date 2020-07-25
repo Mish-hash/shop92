@@ -77,7 +77,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -89,7 +90,18 @@ class CategoryController extends Controller
      */
     public function update(StoreCategory $request, $id)
     {
-        //
+        /* $request->validate([
+            'name' => 'required|unique:categories,name,'.$id.'|max:64',
+            'slug' => 'nullable|unique:categories,name,'.$id.'|max:128',
+            'img' => 'nullable|mimes:jpeg,bmp,png',
+        ]); */
+
+        $category = Category::findOrFail($id);
+        $category->update( $request->all() );
+        return redirect(route('category.index'))
+        ->with('success', 'Category ' . $category->name . ' updated!');
+
+       
     }
 
     /**
