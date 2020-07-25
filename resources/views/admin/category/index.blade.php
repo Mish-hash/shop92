@@ -9,6 +9,8 @@
 @stop
 
 @section('content')
+
+    @include('admin._messages')
     <table class="table">
         <thead>
             <tr>

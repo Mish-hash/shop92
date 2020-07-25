@@ -14,11 +14,17 @@
         @csrf
         <div class="form-group">
             <label for="name">Category Name</label>
-            <input type="text" name="name" id="name" class="form-control">
+        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" value="{{old('name')}}">
+            @error('name')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for="slug">Slug</label>
-            <input type="text" name="slug" id="slug" class="form-control">
+            <input type="text" name="slug" id="slug" class="form-control @error('name') is-invalid @enderror" value="{{old('slug')}}">
+            @error('slug')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
         <div class="form-group">
             <label for="file">Image</label>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Category;
+use App\Http\Requests\StoreCategory;
 
 class CategoryController extends Controller
 {
@@ -36,16 +37,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategory $request)
     {
 
-        $validatedData = $request->validate([
-            'name' => 'required|unique:categories|max:64',
-            'slug' => 'required|unique:categories|max:128',
-            'file' => 'nullable|mimes:jpeg,bmp,png|size:10240',
-        ]);
-
-        $category = new Category();
+        /* $category = new Category();
         $category->name = $request->name;
         $category->slug = $request->slug;
 
@@ -55,7 +50,10 @@ class CategoryController extends Controller
             $img->move( public_path('uploads'), $fName );
             $category->img = '/uploads/' . $fName;
         }
-        $category->save();
+        $category->save(); */
+
+        $category = Category::create( $request->all() );
+
         return redirect(route('category.index'))
         ->with('success', 'Category ' . $category->name . ' added!');
     }
@@ -89,7 +87,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCategory $request, $id)
     {
         //
     }
