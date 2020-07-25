@@ -26,8 +26,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
+    // GET|HEAD  | admin/category/create | category.create  | App\Http\Controllers\Admin\CategoryController@create | App\Http\Middleware\EncryptCookies
 
     /**
      * Store a newly created resource in storage.
@@ -37,7 +38,26 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validatedData = $request->validate([
+            'name' => 'required|unique:categories|max:64',
+            'slug' => 'required|unique:categories|max:128',
+            'file' => 'nullable|mimes:jpeg,bmp,png|size:10240',
+        ]);
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->slug = $request->slug;
+
+        $img = $request->file('file');
+        if ($img) {
+            $fName = $img->getClientOriginalName();
+            $img->move( public_path('uploads'), $fName );
+            $category->img = '/uploads/' . $fName;
+        }
+        $category->save();
+        return redirect(route('category.index'))
+        ->with('success', 'Category ' . $category->name . ' added!');
     }
 
     /**
