@@ -11,7 +11,7 @@
 @section('content')
 
     @include('admin._messages')
-    <table class="table">
+    <table class="table datatable">
         <thead>
             <tr>
                 <th>#</th>
@@ -41,3 +41,11 @@
         </tbody>
     </table>
 @stop
+
+@section('js')
+    <script>
+        $(document).ready(function(){
+            $('.datatable').DataTable();
+        })
+    </script>
+@endsection

@@ -32,6 +32,13 @@ Route::group([
     Route::resource('category', 'CategoryController');
 });
 
+Route::group([
+    'prefix' => 'laravel-filemanager', 
+    'middleware' => ['web', 'auth']
+], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
 
 
 //Route::get('/home', 'HomeController@index');

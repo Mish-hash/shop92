@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name', 64);
             $table->string('slug', 128)->unique();
             $table->string('img', 128)->nullable();
+            $table->text('description')->nullable();
 
             $table->float('price');
             $table->boolean('recomended')->default(0);
