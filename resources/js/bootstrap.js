@@ -39,3 +39,50 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+if( document.querySelector('.add-to-cart') ){
+    document.querySelector('.add-to-cart').addEventListener('submit', function(e){
+        e.preventDefault();
+        let data = new FormData(this);
+
+        axios.post('/cart/add', data)
+        .then(function (response) {
+            showCart(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    });
+}
+
+function showCart(data) {
+    document.querySelector('.modal-body').innerHTML = data;
+}
+
+document.querySelector('.btn-clear-cart').addEventListener('click', function(e){
+    e.preventDefault();
+    axios.post('/cart/clear')
+        .then(function (response) {
+            showCart(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+});
+
+document.querySelector('.modal-body').addEventListener('click', function(e){
+    e.preventDefault();
+    if(e.target.classList.contains('btn-cart-delete')){
+
+        axios.post('/cart/remove', {
+            id: e.target.getAttribute('data-id')
+        })
+        .then(function (response) {
+            showCart(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    };
+    
+});

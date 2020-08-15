@@ -18,4 +18,15 @@ class ShopController extends Controller
         
         return view('shop.category', compact('category', 'products'));
     }
+
+    public function product($slug)
+    {
+        //Category::where('slug', $slug)->first();
+        //Category::firstWhere('slug', $slug); // для ларавель 7х
+        $product = Product::firstWhere('slug', $slug);//для ларавель 5х
+        //dd($category);
+        //$products = Product::where('category_id', $category->id)->get();
+        
+        return view('shop.product', compact('product'));
+    }
 }

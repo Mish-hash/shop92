@@ -19,6 +19,11 @@ Route::get('/', 'MainController@index')->name('home');
 Route::get('/contacts', 'MainController@contacts');
 Route::post('/contacts', 'MainController@getContacts');
 Route::get('/category/{slug}', 'ShopController@category');
+Route::get('/product/{slug}', 'ShopController@product');
+
+Route::post('/cart/add', 'CartController@add');
+Route::post('/cart/clear', 'CartController@clear');
+Route::post('/cart/remove', 'CartController@remove');
 
 Auth::routes();
 

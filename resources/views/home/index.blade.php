@@ -17,7 +17,7 @@
     <div class="row">
         @foreach ($products as $product)
             <div class="col-md-3 mb-5">
-                Category: {{$product->category->name}}
+                Category: {{$product->category ? $product->category->name : 'Without category'}}
                 <a href="/product/{{$product->slug}}">
                     <img src="{{ $product->img }}" alt="{{ $product->slug }}" class="img-fluid">
                     {{ $product->name }}
